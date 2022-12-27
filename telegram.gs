@@ -59,6 +59,10 @@ function sendTypingToTelegram() {
 function handleTelegramWebhook(webhookData) {
   const { message = null } = webhookData;
 
+  if (!message || TELEGRAM_CHAT_ID.localeCompare(message.chat.id) !== 0) {
+    return;
+  }
+
   switch (message.text) {
     case '/register': {
       sendMessageToTelegram(`*Ok!* Please wait...`);
